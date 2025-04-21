@@ -2,15 +2,17 @@
 * Name: Solföljare 
 * Author: Ludvig Thulin
 * Date: 2025-04-13
-* Description: Projektet använder 2st servos som vrids på x och y-axel. Projektet mäter av ljusstyrkan med hjälp av fotoresistorer. Tillsammans hjälper de åt att positionera rätt så att alla fotoresistorer får slutligen samma värde. 
+* Description: Projektet använder 2st servos som vrids på x & y-axel. Projektet mäter av ljusstyrkan med hjälp av fotoresistorer. Tillsammans hjälper de åt att positionera rätt så att alla fotoresistorer får slutligen samma värde. 
 */
 
 #include <Servo.h>  // Bibliotek Servo
 #include <Wire.h>   //
 
-Servo myservoY;  // Servo Variabler
-Servo myservoX;
+// Servo Variabler
+Servo myservoX;   
+Servo myservoY;  
 
+// Deifinierar pins för Fotoresistorer och servo
 #define L1 A0  // vänster uppe
 #define L2 A1  // höger uppe
 #define L3 A2  // vänster nere
@@ -18,18 +20,19 @@ Servo myservoX;
 #define SY A4  // servo y-axeln
 #define SX A5  // Servo x-axeln
 
+// Variabler
 int leftUp;     // vänster uppe
 int rightUp;    // höger uppe
 int leftDown;   // vänster nere
 int rightDown;  // höger nere
 int rotationX = 90; // Starposition på servo
-int rotationY = 0;
+int rotationY = 0;  // Starposition på servo
 int gransVarde = 50; //gränsvärdet på fotoresistorerna innan servot börjar vända sig
 int minX = 0;   //min värde X-axel
 int maxX = 180; //max värde X-axel
 int minY = 0;   //min värde Y-axel
 int maxY = 180; //max värde Y-axel
-int step = 1;   //servo gradrotation 
+int step = 1;   //servo gradrotation. Högre värde = snabbare rotation 
 
 void setup() {
   Serial.begin(9600);
@@ -93,25 +96,25 @@ void loop() {
 }
 
 // Funktion för att läsa ljusstyrka från höger upp fotoresistor
-int HogerUpp() { //Säger höger upp finns på pin A0
+int HogerUpp() { 
   int x = analogRead(L2);
   return x;
 }
 
 // Funktion för att läsa ljusstyrka från vänster upp fotoresistor
-int VansterUpp() { //Säger vänster upp finns på pin A1
+int VansterUpp() {
   int x = analogRead(L1);
   return x;
 }
 
 // Funktion för att läsa ljusstyrka från höger ner fotoresistor
-int HogerNer() { //Säger höger ner finns på pin A2
+int HogerNer() {
   int x = analogRead(L4);
   return x;
 }
 
 // Funktion för att läsa ljusstyrka från vänster nere fotoresistor
-int VansterNer() { //Säger vänster nere finns på pin A3
+int VansterNer() {
   int x = analogRead(L3);
   return x;
 }
